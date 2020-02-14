@@ -1,0 +1,184 @@
+//variables
+$color-blue: hsl(223, 87%, 63%);
+$pale-blue: hsl(223, 100%, 88%);
+$light-red: hsl(354, 100%, 66%);
+$gray: hsl(0, 0%, 59%);
+$dark-blue: hsl(209, 33%, 12%);
+$color-silver: silver;
+$width-responsive: 600px;
+
+//function
+
+@function responsive ($width-responsive , $b) {
+    @return ($width-responsive / $b);
+}
+
+//mixin
+@mixin placeholder {
+        border: 1px solid $color-silver;
+        border-radius: 20px;
+        width: 22rem;
+        height: 40px;
+        margin-right: 10px;
+}
+
+@mixin input {
+    input[type=text] {
+        font-size: .75rem;
+         padding-left: 2rem;
+        &::placeholder {
+            font-size: 1rem;
+            padding-left: 12rem;
+        }
+    }
+}
+
+@mixin flex {
+    display: flex;
+    justify-content: center;
+}
+
+//heritage
+%btn {
+    border-style: none;
+    background-color: $color-blue;
+    border-radius: 2rem;
+    width: 8rem;
+    height: 100%;
+    color: #fff;
+}
+
+body {
+    margin: 0 auto;
+    font-size: 20px;
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+
+.logo {
+    @include flex();
+    margin: 0 auto;
+    width: 90px;
+    padding-top: 4rem;
+    /* padding-bottom: 2rem; */
+
+}
+
+.container {
+    text-align: center;
+
+    &__soon {
+    @include flex();
+
+    &--title {
+        color: $gray;
+        font-weight: 100;
+        padding-right: 10px;
+    }
+ }   
+}
+
+.container__subscribe {
+    @include flex();
+
+    &--hdn {
+        margin-top: 0;
+        font-size: 1em;
+        font-weight: 100;
+        padding-bottom: 15px;
+    }
+}
+
+.form {
+    @include flex()
+    
+    &__input--email {
+        @include input();
+        @include placeholder();
+    }
+
+    &__button--submit {
+        @extend %btn;
+        &:hover {
+            color: $color-blue;
+            background-color: $pale-blue;
+        }
+    }
+}
+
+.dash {
+    @include flex();
+
+    .dash__img {
+        padding-top: 4em;
+        width: 600px;
+    }
+}
+
+#social {
+    @include flex();
+    padding-top: 3em;
+    color: $color-blue;
+	flex-direction: row;
+	align-items: center;
+    align-content: space-between;
+   
+    .fab {
+        border-radius: 50%;
+        background: #fff;
+        border: .4px solid $color-blue;
+        margin: .5em;
+        padding: .5em;
+
+        &:hover {
+            background-color: $pale-blue;
+        }
+    }  
+}
+
+.copy {
+    @include flex();
+    font-weight: 100;
+    font-size: .5em;
+    padding-top: 1.5em;
+    color: $color-silver;
+}
+
+.attribution {
+    @include flex();
+    font-size: .5em;
+    color: $color-blue;
+
+    a {
+        text-decoration: none;
+        color: $color-blue;
+        padding-left: 2px;
+
+        &:hover {
+            text-decoration: underline;
+            color: $light-red;
+        }
+    } 
+}
+
+@media only screen and (max-width: 600px) {
+    .form {
+        @include flex();
+        flex-direction: column;
+        text-align: center;
+        &__button {
+            padding-top: 1.5em;
+        }
+        &__button--submit {
+           @include placeholder();
+           border: none; 
+        }
+	
+    }
+
+    .dash {
+        &__img {
+            width: responsive($width-responsive, 2) !important;
+        }
+    }
+}
